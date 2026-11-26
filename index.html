@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -7,171 +7,104 @@
 <title>VYORA TV | لوحة التحكم</title>
 <style>
 :root {
-  --bg:#090d18;
-  --panel:#111827;
-  --panel2:#151e30;
-  --border:#263249;
-  --text:#f3f6fc;
-  --muted:#8995aa;
-  --accent:#8b72ff;
-  --green:#32c997;
-  --orange:#f5b85c;
+  --bg:#090d18;--panel:#111827;--panel2:#151e30;
+  --border:#263249;--text:#f3f6fc;--muted:#8995aa;
+  --accent:#8b72ff;--green:#32c997;--orange:#f5b85c;
 }
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Tahoma,Arial,sans-serif;
-}
-.layout { display:flex; min-height:100vh; }
-.sidebar {
-  width:245px;
-  background:#0d1422;
-  border-left:1px solid var(--border);
-  padding:25px 17px;
-  flex-shrink:0;
-}
-.logo {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:5px 8px 30px;
-  border-bottom:1px solid var(--border);
-}
-.logo-mark {
-  width:42px;height:42px;border-radius:13px;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,#967cff,#5140b9);
-  font-size:21px;font-weight:bold;
-}
-.logo h2 { margin:0;font-size:19px;letter-spacing:1px; }
-.logo small { color:var(--muted);font-size:10px; }
-.nav-title {
-  color:#65738b;font-size:11px;
-  padding:25px 12px 10px;
-}
-.nav a {
-  display:block;text-decoration:none;color:#aab5c8;
-  padding:13px 14px;border-radius:10px;
-  margin:5px 0;font-size:13px;
-}
-.nav a.active {
-  background:#29234b;color:#c7baff;
-  border:1px solid #453b76;
-}
-.nav a:hover { background:#19243a; }
-.sidebar-footer {
-  margin-top:45px;padding:15px 10px;
-  border-top:1px solid var(--border);
-  color:var(--muted);font-size:11px;line-height:2;
-}
-main { flex:1;min-width:0;padding:28px 32px; }
-.topbar {
-  display:flex;justify-content:space-between;
-  align-items:center;gap:15px;margin-bottom:30px;
-}
-.topbar h1 { font-size:23px;margin:0 0 8px; }
-.topbar p { margin:0;color:var(--muted);font-size:12px; }
-.admin {
-  display:flex;align-items:center;gap:10px;
-  background:var(--panel);border:1px solid var(--border);
-  padding:9px 13px;border-radius:12px;font-size:12px;
-}
-.avatar {
-  width:34px;height:34px;border-radius:10px;
-  background:#342c61;color:#c9bdff;
-  display:grid;place-items:center;font-weight:bold;
-}
-.section-title { font-size:15px;margin:28px 0 15px; }
-.stats {
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:15px;
-}
-.card {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:15px;padding:20px;
-}
-.stat-label { color:var(--muted);font-size:12px; }
-.stat-value { font-size:27px;font-weight:bold;margin:15px 0 7px; }
-.stat-note { color:var(--green);font-size:11px; }
-.content-grid {
-  display:grid;grid-template-columns:1.5fr 1fr;
-  gap:16px;
-}
-.panel-title {
-  display:flex;justify-content:space-between;
-  align-items:center;margin-bottom:18px;
-}
-.panel-title h3 { font-size:14px;margin:0; }
-.panel-title span { color:var(--muted);font-size:11px; }
-.table-wrap { overflow-x:auto; }
-table { width:100%;border-collapse:collapse;min-width:440px; }
-th {
-  color:var(--muted);font-size:11px;
-  font-weight:normal;text-align:right;
-  padding:12px 8px;border-bottom:1px solid var(--border);
-}
-td {
-  font-size:12px;padding:15px 8px;
-  border-bottom:1px solid #202b3e;
-}
-.status {
-  display:inline-block;padding:6px 10px;
-  border-radius:20px;font-size:10px;
-}
-.active-status { color:var(--green);background:#12372f; }
-.pending-status { color:var(--orange);background:#3a2d19; }
-.activity {
-  display:flex;gap:12px;padding:14px 0;
-  border-bottom:1px solid var(--border);
-}
-.activity-dot {
-  width:9px;height:9px;border-radius:50%;
-  background:var(--accent);margin-top:5px;flex-shrink:0;
-}
-.activity strong { display:block;font-size:12px;margin-bottom:6px; }
-.activity small { color:var(--muted);font-size:10px; }
-.notice {
-  margin-top:20px;padding:15px 17px;
-  border:1px solid #42386d;background:#19172c;
-  border-radius:12px;color:#c8c0ec;
-  font-size:11px;line-height:2;
-}
-@media(max-width:950px) {
-  .stats { grid-template-columns:repeat(2,1fr); }
-  .content-grid { grid-template-columns:1fr; }
-}
-@media(max-width:650px) {
-  .layout { display:block; }
-  .sidebar { width:100%;padding:14px; }
-  .logo { padding-bottom:14px; }
-  .nav-title,.sidebar-footer { display:none; }
-  .nav { display:flex;overflow-x:auto;gap:5px;padding-top:12px; }
-  .nav a { white-space:nowrap;margin:0;padding:10px; }
-  main { padding:20px 14px; }
-  .topbar { align-items:flex-start; }
-  .topbar h1 { font-size:19px; }
-  .admin { padding:7px; }
-  .stats { gap:9px; }
-  .card { padding:14px; }
-  .stat-value { font-size:23px; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:245px;background:#0d1422;border-left:1px solid var(--border);padding:25px 17px;flex-shrink:0}
+.logo{display:flex;align-items:center;gap:12px;padding:5px 8px 30px;border-bottom:1px solid var(--border)}
+.logo-mark{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#967cff,#5140b9);font-size:21px;font-weight:bold}
+.logo h2{margin:0;font-size:19px;letter-spacing:1px}
+.logo small{color:var(--muted);font-size:10px}
+.nav-title{color:#65738b;font-size:11px;padding:25px 12px 10px}
+.nav a{display:block;text-decoration:none;color:#aab5c8;padding:13px 14px;border-radius:10px;margin:5px 0;font-size:13px}
+.nav a.active{background:#29234b;color:#c7baff;border:1px solid #453b76}
+.nav a:hover{background:#19243a}
+.sidebar-footer{margin-top:45px;padding:15px 10px;border-top:1px solid var(--border);color:var(--muted);font-size:11px;line-height:2}
+main{flex:1;min-width:0;padding:28px 32px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:30px}
+.topbar h1{font-size:23px;margin:0 0 8px}
+.topbar p{margin:0;color:var(--muted);font-size:12px}
+.admin{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);padding:9px 13px;border-radius:12px;font-size:12px}
+.avatar{width:34px;height:34px;border-radius:10px;background:#342c61;color:#c9bdff;display:grid;place-items:center;font-weight:bold}
+.section-title{font-size:15px;margin:28px 0 15px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:15px;padding:20px}
+.stat-label{color:var(--muted);font-size:12px}
+.stat-value{font-size:27px;font-weight:bold;margin:15px 0 7px}
+.stat-note{color:var(--green);font-size:11px}
+.content-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+.panel-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.panel-title h3{font-size:14px;margin:0}
+.panel-title span{color:var(--muted);font-size:11px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:440px}
+th{color:var(--muted);font-size:11px;font-weight:normal;text-align:right;padding:12px 8px;border-bottom:1px solid var(--border)}
+td{font-size:12px;padding:15px 8px;border-bottom:1px solid #202b3e}
+.status{display:inline-block;padding:6px 10px;border-radius:20px;font-size:10px}
+.active-status{color:var(--green);background:#12372f}
+.pending-status{color:var(--orange);background:#3a2d19}
+.activity{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}
+.activity-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);margin-top:5px;flex-shrink:0}
+.activity strong{display:block;font-size:12px;margin-bottom:6px}
+.activity small{color:var(--muted);font-size:10px}
+.notice{margin-top:20px;padding:15px 17px;border:1px solid #42386d;background:#19172c;border-radius:12px;color:#c8c0ec;font-size:11px;line-height:2}
+
+/* شاشة تسجيل الدخول */
+body:not(.authenticated) .layout{display:none}
+.login-screen{min-height:100vh;display:grid;place-items:center;padding:20px}
+body.authenticated .login-screen{display:none}
+.login-card{width:100%;max-width:410px;background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:30px;box-shadow:0 20px 60px #0005}
+.login-brand{text-align:center;margin-bottom:28px}
+.login-brand .logo-mark{margin:0 auto 14px}
+.login-brand h1{font-size:22px;margin:0 0 8px}
+.login-brand p{font-size:12px;color:var(--muted);margin:0}
+.login-card label{display:block;font-size:12px;margin-bottom:9px;color:#cbd4e4}
+.login-card input{width:100%;padding:14px;background:#090d18;border:1px solid var(--border);border-radius:10px;color:white;font-size:15px;outline:none}
+.login-card input:focus{border-color:var(--accent)}
+.login-card button,.logout-button{border:0;border-radius:10px;background:var(--accent);color:white;padding:13px 18px;font-family:inherit;cursor:pointer;font-size:13px}
+.login-card button{width:100%;margin-top:16px}
+.login-card button:disabled{opacity:.6;cursor:wait}
+.login-message{font-size:12px;line-height:1.8;margin-top:14px;color:var(--orange);min-height:20px}
+.logout-button{background:#30233a;border:1px solid #68405c;padding:9px 12px;font-size:11px}
+@media(max-width:950px){.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}}
+@media(max-width:650px){
+.layout{display:block}.sidebar{width:100%;padding:14px}.logo{padding-bottom:14px}
+.nav-title,.sidebar-footer{display:none}.nav{display:flex;overflow-x:auto;gap:5px;padding-top:12px}
+.nav a{white-space:nowrap;margin:0;padding:10px}main{padding:20px 14px}
+.topbar{align-items:flex-start}.topbar h1{font-size:19px}.admin{padding:7px}
+.stats{gap:9px}.card{padding:14px}.stat-value{font-size:23px}
 }
 </style>
 </head>
 <body>
-<div class="layout">
 
+<!-- تسجيل الدخول -->
+<section class="login-screen">
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="logo-mark">V</div>
+      <h1>VYORA TV</h1>
+      <p>تسجيل دخول المدير إلى لوحة التحكم</p>
+    </div>
+    <form id="loginForm">
+      <label for="adminPassword">كلمة مرور المدير</label>
+      <input id="adminPassword" type="password" autocomplete="current-password" required placeholder="أدخل كلمة المرور">
+      <button id="loginButton" type="submit">تسجيل الدخول</button>
+      <div id="loginMessage" class="login-message" role="alert"></div>
+    </form>
+  </div>
+</section>
+
+<div class="layout">
 <aside class="sidebar">
   <div class="logo">
     <div class="logo-mark">V</div>
-    <div>
-      <h2>VYORA TV</h2>
-      <small>ADMIN CONTROL PANEL</small>
-    </div>
+    <div><h2>VYORA TV</h2><small>ADMIN CONTROL PANEL</small></div>
   </div>
-
   <div class="nav-title">القائمة الرئيسية</div>
   <nav class="nav">
     <a class="active" href="#overview">لوحة المعلومات</a>
@@ -180,11 +113,7 @@ td {
     <a href="#activity">سجل النشاط</a>
     <a href="#settings">الإعدادات</a>
   </nav>
-
-  <div class="sidebar-footer">
-    نظام إدارة VYORA TV<br>
-    الإصدار الأولي 1.0
-  </div>
+  <div class="sidebar-footer">نظام إدارة VYORA TV<br>الإصدار الأولي 1.0</div>
 </aside>
 
 <main>
@@ -193,98 +122,45 @@ td {
       <h1>لوحة التحكم</h1>
       <p>مرحباً بك في مركز إدارة VYORA TV</p>
     </div>
-    <div class="admin">
-      <div class="avatar">م</div>
-      <div>المدير الرئيسي</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div class="admin">
+        <div class="avatar">م</div>
+        <div>المدير الرئيسي</div>
+      </div>
+      <button class="logout-button" id="logoutButton" type="button">تسجيل الخروج</button>
     </div>
   </header>
 
   <section id="overview">
     <h2 class="section-title">نظرة عامة</h2>
     <div class="stats">
-      <div class="card">
-        <div class="stat-label">إجمالي العملاء</div>
-        <div class="stat-value">0</div>
-        <div class="stat-note">حسابات العملاء</div>
-      </div>
-      <div class="card">
-        <div class="stat-label">التراخيص النشطة</div>
-        <div class="stat-value">0</div>
-        <div class="stat-note">تراخيص فعالة</div>
-      </div>
-      <div class="card">
-        <div class="stat-label">التراخيص المنتهية</div>
-        <div class="stat-value">0</div>
-        <div class="stat-note">تحتاج إلى تجديد</div>
-      </div>
-      <div class="card">
-        <div class="stat-label">التراخيص الموقوفة</div>
-        <div class="stat-value">0</div>
-        <div class="stat-note">حسابات موقوفة</div>
-      </div>
+      <div class="card"><div class="stat-label">إجمالي العملاء</div><div class="stat-value">0</div><div class="stat-note">حسابات العملاء</div></div>
+      <div class="card"><div class="stat-label">التراخيص النشطة</div><div class="stat-value">0</div><div class="stat-note">تراخيص فعالة</div></div>
+      <div class="card"><div class="stat-label">التراخيص المنتهية</div><div class="stat-value">0</div><div class="stat-note">تحتاج إلى تجديد</div></div>
+      <div class="card"><div class="stat-label">التراخيص الموقوفة</div><div class="stat-value">0</div><div class="stat-note">حسابات موقوفة</div></div>
     </div>
   </section>
 
   <section class="content-grid">
     <div class="card" id="customers">
-      <div class="panel-title">
-        <h3>أحدث العملاء</h3>
-        <span>بيانات تجريبية</span>
-      </div>
+      <div class="panel-title"><h3>أحدث العملاء</h3><span>بيانات تجريبية</span></div>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr>
-              <th>العميل</th>
-              <th>الترخيص</th>
-              <th>الحالة</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="3" style="text-align:center;color:#8995aa;padding:30px">
-                لا توجد حسابات عملاء حتى الآن
-              </td>
-            </tr>
-          </tbody>
+          <thead><tr><th>العميل</th><th>الترخيص</th><th>الحالة</th></tr></thead>
+          <tbody><tr><td colspan="3" style="text-align:center;color:#8995aa;padding:30px">لا توجد حسابات عملاء حتى الآن</td></tr></tbody>
         </table>
       </div>
     </div>
-
     <div class="card" id="activity">
-      <div class="panel-title">
-        <h3>سجل النشاط</h3>
-        <span>آخر العمليات</span>
-      </div>
-      <div class="activity">
-        <div class="activity-dot"></div>
-        <div>
-          <strong>تم تجهيز واجهة لوحة التحكم</strong>
-          <small>مرحلة التصميم الأولي</small>
-        </div>
-      </div>
-      <div class="activity">
-        <div class="activity-dot"></div>
-        <div>
-          <strong>نظام العملاء</strong>
-          <small>بانتظار ربط قاعدة البيانات</small>
-        </div>
-      </div>
-      <div class="activity">
-        <div class="activity-dot"></div>
-        <div>
-          <strong>نظام التراخيص</strong>
-          <small>بانتظار بناء الخادم الخلفي</small>
-        </div>
-      </div>
+      <div class="panel-title"><h3>سجل النشاط</h3><span>آخر العمليات</span></div>
+      <div class="activity"><div class="activity-dot"></div><div><strong>تم تجهيز واجهة لوحة التحكم</strong><small>مرحلة التصميم الأولي</small></div></div>
+      <div class="activity"><div class="activity-dot"></div><div><strong>نظام العملاء</strong><small>بانتظار ربط قاعدة البيانات</small></div></div>
+      <div class="activity"><div class="activity-dot"></div><div><strong>نظام التراخيص</strong><small>بانتظار بناء الخادم الخلفي</small></div></div>
     </div>
   </section>
 
   <section class="card" id="licenses" style="margin-top:18px">
-    <div class="panel-title">
-      <h3>إدارة التراخيص</h3>
-      <span>سيتم تفعيل الإدارة في مرحلة الربط</span>
-    </div>
+    <div class="panel-title"><h3>إدارة التراخيص</h3><span>سيتم تفعيل الإدارة في مرحلة الربط</span></div>
     <p style="color:#8995aa;font-size:12px;line-height:2">
       من هنا ستتمكن مستقبلاً من إنشاء أكواد التفعيل، وتحديد مدة كل ترخيص،
       وتجديده أو إيقافه ومتابعة حالة كل عميل.
@@ -293,11 +169,105 @@ td {
 
   <div class="notice" id="settings">
     <strong>تنبيه أمني:</strong>
-    هذه واجهة تصميم أولية فقط. لا تحفظ بيانات العملاء أو كلمات المرور،
-    ولا تتصل بسيرفر IPTV. ستتم إضافة تسجيل دخول آمن وخادم خلفي مستقل
-    قبل استخدام اللوحة فعلياً.
+    هذه واجهة أولية. لا تحفظ بيانات العملاء أو كلمات المرور،
+    ولا تتصل مباشرة بسيرفر IPTV.
   </div>
 </main>
 </div>
+
+<script>
+(() => {
+  "use strict";
+
+  const API = "/.netlify/functions/servers";
+  const form = document.getElementById("loginForm");
+  const passwordInput = document.getElementById("adminPassword");
+  const loginButton = document.getElementById("loginButton");
+  const message = document.getElementById("loginMessage");
+  const logoutButton = document.getElementById("logoutButton");
+
+  function showDashboard() {
+    document.body.classList.add("authenticated");
+    passwordInput.value = "";
+  }
+
+  function showLogin(text = "") {
+    document.body.classList.remove("authenticated");
+    message.textContent = text;
+  }
+
+  async function checkSession() {
+    try {
+      const response = await fetch(API, {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-store"
+      });
+
+      if (response.ok) {
+        showDashboard();
+      } else {
+        showLogin();
+      }
+    } catch {
+      showLogin("تعذر الاتصال بالخادم. تحقق من اتصال الإنترنت وحاول مجدداً.");
+    }
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const password = passwordInput.value;
+    if (!password) return;
+
+    loginButton.disabled = true;
+    loginButton.textContent = "جارٍ التحقق...";
+    message.textContent = "";
+
+    try {
+      const response = await fetch(API, {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "login", password })
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.error || "كلمة المرور غير صحيحة أو تعذر تسجيل الدخول.");
+      }
+
+      showDashboard();
+    } catch (error) {
+      showLogin(error.message || "حدث خطأ أثناء تسجيل الدخول.");
+    } finally {
+      loginButton.disabled = false;
+      loginButton.textContent = "تسجيل الدخول";
+    }
+  });
+
+  logoutButton.addEventListener("click", async () => {
+    logoutButton.disabled = true;
+
+    try {
+      await fetch(API, {
+        method: "POST",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "logout" })
+      });
+    } catch {
+      // نعود إلى شاشة الدخول حتى لو تعذر الاتصال.
+    }
+
+    showLogin("تم تسجيل الخروج.");
+    logoutButton.disabled = false;
+  });
+
+  checkSession();
+})();
+</script>
 </body>
 </html>
+```
