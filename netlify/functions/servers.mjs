@@ -49,10 +49,15 @@ const createSession = async (secret) => {
   return `${payload}.${base64url(signature)}`;
 };
 
+// Returns null when valid, otherwise a safe diagnostic reason.
 const verifySession = async (token, secret) => {
   try {
-    const [payload, signature] = token.split(".");
-    if (!payload || !signature) return false;
+    const parts = token.split(".");
+    if (parts.length !== 2 || !parts[0] || !parts[1]) {
+      return "malformed_cookie";
+    }
+
+    const [payload, signature] = parts;
 
     const valid = await crypto.subtle.verify(
       "HMAC",
@@ -61,17 +66,27 @@ const verifySession = async (token, secret) => {
       encoder.encode(payload)
     );
 
-    if (!valid) return false;
+    if (!valid) return "invalid_signature";
 
     const data = JSON.parse(
       new TextDecoder().decode(fromBase64url(payload))
     );
 
-    return data.exp > Math.floor(Date.now() / 1000);
+    if (typeof data.exp !== "number") return "invalid_payload";
+    if (data.exp <= Math.floor(Date.now() / 1000)) return "session_expired";
+
+    return null;
   } catch {
-    return false;
+    return "verification_error";
   }
 };
+
+const getToken = (request) =>
+  (request.headers.get("Cookie") || "")
+    .split(";")
+    .map(v => v.trim())
+    .find(v => v.startsWith(`${COOKIE}=`))
+    ?.slice(COOKIE.length + 1) || null;
 
 const safeEqual = (a, b) => {
   const x = encoder.encode(a);
@@ -81,6 +96,12 @@ const safeEqual = (a, b) => {
   let result = 0;
   for (let i = 0; i < x.length; i++) result |= x[i] ^ y[i];
   return result === 0;
+};
+
+const authorize = async (request, secret) => {
+  const token = getToken(request);
+  if (!token) return "cookie_missing";
+  return await verifySession(token, secret);
 };
 
 export default async (request) => {
@@ -141,29 +162,18 @@ export default async (request) => {
       );
     }
 
-    const token = (request.headers.get("Cookie") || "")
-      .split(";")
-      .map(v => v.trim())
-      .find(v => v.startsWith(`${COOKIE}=`))
-      ?.slice(COOKIE.length + 1);
-
-    if (!token || !(await verifySession(token, sessionSecret))) {
-      return json({ error: "Unauthorized" }, 401);
+    const reason = await authorize(request, sessionSecret);
+    if (reason) {
+      return json({ error: "Unauthorized", reason }, 401);
     }
 
     delete body.action;
-
     return proxyRequest(method, url, body, apiKey);
   }
 
-  const token = (request.headers.get("Cookie") || "")
-    .split(";")
-    .map(v => v.trim())
-    .find(v => v.startsWith(`${COOKIE}=`))
-    ?.slice(COOKIE.length + 1);
-
-  if (!token || !(await verifySession(token, sessionSecret))) {
-    return json({ error: "Unauthorized" }, 401);
+  const reason = await authorize(request, sessionSecret);
+  if (reason) {
+    return json({ error: "Unauthorized", reason }, 401);
   }
 
   return proxyRequest(method, url, null, apiKey);
