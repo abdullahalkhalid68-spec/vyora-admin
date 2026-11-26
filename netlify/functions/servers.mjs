@@ -146,7 +146,7 @@ export default async (request) => {
         200,
         {
           "Set-Cookie":
-            `${COOKIE}=${token}; HttpOnly; Secure; SameSite=Strict; Path=/.netlify/functions/servers; Max-Age=${SESSION_SECONDS}`
+            `${COOKIE}=${token}; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=${SESSION_SECONDS}`
         }
       );
     }
@@ -157,7 +157,7 @@ export default async (request) => {
         200,
         {
           "Set-Cookie":
-            `${COOKIE}=; HttpOnly; Secure; SameSite=Strict; Path=/.netlify/functions/servers; Max-Age=0`
+            `${COOKIE}=; HttpOnly; Secure; SameSite=Strict; Path=/; Max-Age=0`
         }
       );
     }
