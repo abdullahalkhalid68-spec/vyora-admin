@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYORA TV | لوحة التحكم</title>
+<style>
+:root {
+  --bg:#090d18;
+  --panel:#111827;
+  --panel2:#151e30;
+  --border:#263249;
+  --text:#f3f6fc;
+  --muted:#8995aa;
+  --accent:#8b72ff;
+  --green:#32c997;
+  --orange:#f5b85c;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Tahoma,Arial,sans-serif;
+}
+.layout { display:flex; min-height:100vh; }
+.sidebar {
+  width:245px;
+  background:#0d1422;
+  border-left:1px solid var(--border);
+  padding:25px 17px;
+  flex-shrink:0;
+}
+.logo {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:5px 8px 30px;
+  border-bottom:1px solid var(--border);
+}
+.logo-mark {
+  width:42px;height:42px;border-radius:13px;
+  display:grid;place-items:center;
+  background:linear-gradient(135deg,#967cff,#5140b9);
+  font-size:21px;font-weight:bold;
+}
+.logo h2 { margin:0;font-size:19px;letter-spacing:1px; }
+.logo small { color:var(--muted);font-size:10px; }
+.nav-title {
+  color:#65738b;font-size:11px;
+  padding:25px 12px 10px;
+}
+.nav a {
+  display:block;text-decoration:none;color:#aab5c8;
+  padding:13px 14px;border-radius:10px;
+  margin:5px 0;font-size:13px;
+}
+.nav a.active {
+  background:#29234b;color:#c7baff;
+  border:1px solid #453b76;
+}
+.nav a:hover { background:#19243a; }
+.sidebar-footer {
+  margin-top:45px;padding:15px 10px;
+  border-top:1px solid var(--border);
+  color:var(--muted);font-size:11px;line-height:2;
+}
+main { flex:1;min-width:0;padding:28px 32px; }
+.topbar {
+  display:flex;justify-content:space-between;
+  align-items:center;gap:15px;margin-bottom:30px;
+}
+.topbar h1 { font-size:23px;margin:0 0 8px; }
+.topbar p { margin:0;color:var(--muted);font-size:12px; }
+.admin {
+  display:flex;align-items:center;gap:10px;
+  background:var(--panel);border:1px solid var(--border);
+  padding:9px 13px;border-radius:12px;font-size:12px;
+}
+.avatar {
+  width:34px;height:34px;border-radius:10px;
+  background:#342c61;color:#c9bdff;
+  display:grid;place-items:center;font-weight:bold;
+}
+.section-title { font-size:15px;margin:28px 0 15px; }
+.stats {
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+.card {
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:15px;padding:20px;
+}
+.stat-label { color:var(--muted);font-size:12px; }
+.stat-value { font-size:27px;font-weight:bold;margin:15px 0 7px; }
+.stat-note { color:var(--green);font-size:11px; }
+.content-grid {
+  display:grid;grid-template-columns:1.5fr 1fr;
+  gap:16px;
+}
+.panel-title {
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:18px;
+}
+.panel-title h3 { font-size:14px;margin:0; }
+.panel-title span { color:var(--muted);font-size:11px; }
+.table-wrap { overflow-x:auto; }
+table { width:100%;border-collapse:collapse;min-width:440px; }
+th {
+  color:var(--muted);font-size:11px;
+  font-weight:normal;text-align:right;
+  padding:12px 8px;border-bottom:1px solid var(--border);
+}
+td {
+  font-size:12px;padding:15px 8px;
+  border-bottom:1px solid #202b3e;
+}
+.status {
+  display:inline-block;padding:6px 10px;
+  border-radius:20px;font-size:10px;
+}
+.active-status { color:var(--green);background:#12372f; }
+.pending-status { color:var(--orange);background:#3a2d19; }
+.activity {
+  display:flex;gap:12px;padding:14px 0;
+  border-bottom:1px solid var(--border);
+}
+.activity-dot {
+  width:9px;height:9px;border-radius:50%;
+  background:var(--accent);margin-top:5px;flex-shrink:0;
+}
+.activity strong { display:block;font-size:12px;margin-bottom:6px; }
+.activity small { color:var(--muted);font-size:10px; }
+.notice {
+  margin-top:20px;padding:15px 17px;
+  border:1px solid #42386d;background:#19172c;
+  border-radius:12px;color:#c8c0ec;
+  font-size:11px;line-height:2;
+}
+@media(max-width:950px) {
+  .stats { grid-template-columns:repeat(2,1fr); }
+  .content-grid { grid-template-columns:1fr; }
+}
+@media(max-width:650px) {
+  .layout { display:block; }
+  .sidebar { width:100%;padding:14px; }
+  .logo { padding-bottom:14px; }
+  .nav-title,.sidebar-footer { display:none; }
+  .nav { display:flex;overflow-x:auto;gap:5px;padding-top:12px; }
+  .nav a { white-space:nowrap;margin:0;padding:10px; }
+  main { padding:20px 14px; }
+  .topbar { align-items:flex-start; }
+  .topbar h1 { font-size:19px; }
+  .admin { padding:7px; }
+  .stats { gap:9px; }
+  .card { padding:14px; }
+  .stat-value { font-size:23px; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-mark">V</div>
+    <div>
+      <h2>VYORA TV</h2>
+      <small>ADMIN CONTROL PANEL</small>
+    </div>
+  </div>
+
+  <div class="nav-title">القائمة الرئيسية</div>
+  <nav class="nav">
+    <a class="active" href="#overview">لوحة المعلومات</a>
+    <a href="#customers">العملاء</a>
+    <a href="#licenses">التراخيص</a>
+    <a href="#activity">سجل النشاط</a>
+    <a href="#settings">الإعدادات</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    نظام إدارة VYORA TV<br>
+    الإصدار الأولي 1.0
+  </div>
+</aside>
+
+<main>
+  <header class="topbar">
+    <div>
+      <h1>لوحة التحكم</h1>
+      <p>مرحباً بك في مركز إدارة VYORA TV</p>
+    </div>
+    <div class="admin">
+      <div class="avatar">م</div>
+      <div>المدير الرئيسي</div>
+    </div>
+  </header>
+
+  <section id="overview">
+    <h2 class="section-title">نظرة عامة</h2>
+    <div class="stats">
+      <div class="card">
+        <div class="stat-label">إجمالي العملاء</div>
+        <div class="stat-value">0</div>
+        <div class="stat-note">حسابات العملاء</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">التراخيص النشطة</div>
+        <div class="stat-value">0</div>
+        <div class="stat-note">تراخيص فعالة</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">التراخيص المنتهية</div>
+        <div class="stat-value">0</div>
+        <div class="stat-note">تحتاج إلى تجديد</div>
+      </div>
+      <div class="card">
+        <div class="stat-label">التراخيص الموقوفة</div>
+        <div class="stat-value">0</div>
+        <div class="stat-note">حسابات موقوفة</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-grid">
+    <div class="card" id="customers">
+      <div class="panel-title">
+        <h3>أحدث العملاء</h3>
+        <span>بيانات تجريبية</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>العميل</th>
+              <th>الترخيص</th>
+              <th>الحالة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="3" style="text-align:center;color:#8995aa;padding:30px">
+                لا توجد حسابات عملاء حتى الآن
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" id="activity">
+      <div class="panel-title">
+        <h3>سجل النشاط</h3>
+        <span>آخر العمليات</span>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div>
+          <strong>تم تجهيز واجهة لوحة التحكم</strong>
+          <small>مرحلة التصميم الأولي</small>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div>
+          <strong>نظام العملاء</strong>
+          <small>بانتظار ربط قاعدة البيانات</small>
+        </div>
+      </div>
+      <div class="activity">
+        <div class="activity-dot"></div>
+        <div>
+          <strong>نظام التراخيص</strong>
+          <small>بانتظار بناء الخادم الخلفي</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="licenses" style="margin-top:18px">
+    <div class="panel-title">
+      <h3>إدارة التراخيص</h3>
+      <span>سيتم تفعيل الإدارة في مرحلة الربط</span>
+    </div>
+    <p style="color:#8995aa;font-size:12px;line-height:2">
+      من هنا ستتمكن مستقبلاً من إنشاء أكواد التفعيل، وتحديد مدة كل ترخيص،
+      وتجديده أو إيقافه ومتابعة حالة كل عميل.
+    </p>
+  </section>
+
+  <div class="notice" id="settings">
+    <strong>تنبيه أمني:</strong>
+    هذه واجهة تصميم أولية فقط. لا تحفظ بيانات العملاء أو كلمات المرور،
+    ولا تتصل بسيرفر IPTV. ستتم إضافة تسجيل دخول آمن وخادم خلفي مستقل
+    قبل استخدام اللوحة فعلياً.
+  </div>
+</main>
+</div>
+</body>
+</html>
